@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f6f8;
+      color: #1f2937;
+      transition: background-color 0.4s ease;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    p {
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      flex: 1;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.6rem 1.1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: #2563eb;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background-color: #1d4ed8;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .secondary-btn {
+      background-color: #e5e7eb;
+      color: #374151;
+      width: 100%;
+    }
+
+    .secondary-btn:hover {
+      background-color: #d1d5db;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1 id="greeting">Hello, World!</h1>
+    <p id="counter-text">Button clicked 0 times</p>
+
+    <div class="input-group">
+      <input type="text" id="name-input" placeholder="Enter your name..." />
+      <button id="greet-btn">Greet</button>
+    </div>
+
+    <button class="secondary-btn" id="theme-btn">Change Background Color</button>
+  </div>
+
+  <script>
+    const greeting = document.getElementById('greeting');
+    const counterText = document.getElementById('counter-text');
+    const nameInput = document.getElementById('name-input');
+    const greetBtn = document.getElementById('greet-btn');
+    const themeBtn = document.getElementById('theme-btn');
+
+    let clickCount = 0;
+    const colors = ['#f4f6f8', '#e0f2fe', '#dcfce7', '#fef3c7', '#fae8ff'];
+    let colorIndex = 0;
+
+    function updateGreeting() {
+      const name = nameInput.value.trim();
+      greeting.textContent = name ? `Hello, ${name}!` : 'Hello, World!';
+      
+      clickCount++;
+      counterText.textContent = `Button clicked ${clickCount} ${clickCount === 1 ? 'time' : 'times'}`;
+    }
+
+    greetBtn.addEventListener('click', updateGreeting);
+
+    nameInput.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        updateGreeting();
+      }
+    });
+
+    themeBtn.addEventListener('click', () => {
+      colorIndex = (colorIndex + 1) % colors.length;
+      document.body.style.backgroundColor = colors[colorIndex];
+    });
+  </script>
+
+</body>
+</html>
